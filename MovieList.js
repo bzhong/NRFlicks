@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   StyleSheet,
   RefreshControl,
+  TextInput,
 } from 'react-native';
 import MovieRow from './MovieRow';
 
@@ -23,11 +24,15 @@ export default class MovieList extends Component {
       canLoadData: true,
       loadSuccess: false,
       refreshing: false,
+      searchText: null,
+      movies: [],
     };
     this.renderMovieRow = this.renderMovieRow.bind(this);
     this.clickMovie = this.clickMovie.bind(this);
     this.onRefresh = this.onRefresh.bind(this);
     this.fetchData = this.fetchData.bind(this);
+    this.changeSearchText = this.changeSearchText.bind(this);
+    this.getFilteredData = this.getFilteredData.bind(this);
   }
 
   componentDidMount() {
@@ -54,6 +59,7 @@ export default class MovieList extends Component {
             dataSource: this.state.dataSource.cloneWithRows(movies),
             animating: false,
             refreshing: false,
+            movies,
           });
         }
       })
@@ -73,6 +79,25 @@ export default class MovieList extends Component {
     })
   }
 
+  changeSearchText(text) {
+    this.setState({ searchText: text });
+  }
+
+  getFilteredData() {
+    const { dataSource, searchText, movies } = this.state;
+    this.setState({ searchText: null });
+    if (searchText === null || searchText.length === 0) {
+      this.setState({
+        dataSource: dataSource.cloneWithRows(movies),
+      });
+    } else {
+      const matches = movies.filter(movie => movie.title.search(searchText) >= 0);
+      this.setState({
+        dataSource: dataSource.cloneWithRows(matches),
+      });
+    }
+  }
+
   onRefresh() {
     this.setState({refreshing: true});
     this.fetchData();
@@ -90,30 +115,46 @@ export default class MovieList extends Component {
   }
 
   render() {
-    const { dataSource } = this.state;
+    const {
+      dataSource,
+      searchText,
+      loadSuccess,
+      animating,
+      refreshing
+    } = this.state;
 
     return (
       <View style={styles.container}>
-        {this.state.animating && (
+        {animating && (
           <View style={styles.centering}>
             <ActivityIndicator
-              animating={this.state.animating}
+              animating={animating}
               size='large'
             />
           </View>
         )}
-        {this.state.canLoadData || this.state.loadSuccess ? (
+        {loadSuccess ? (
           <View style={{flex: 1}}>
-          <ListView
-            dataSource={dataSource}
-            renderRow={(rowData) => this.renderMovieRow(rowData)}
-            refreshControl={
-              <RefreshControl
-                refreshing={this.state.refreshing}
-                onRefresh={this.onRefresh}
+            <View style={styles.searchBar}>
+              <TextInput
+                style={styles.searchInput}
+                placeholder="Search"
+                value={searchText}
+                onChangeText={this.changeSearchText}
+                autoCapitalize="none"
+                onSubmitEditing={this.getFilteredData}
               />
-            }
-          />
+            </View>
+            <ListView
+              dataSource={dataSource}
+              renderRow={(rowData) => this.renderMovieRow(rowData)}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={this.onRefresh}
+                />
+              }
+            />
           </View>
         ) : (
           <View style={styles.networkError}>
@@ -143,7 +184,6 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   networkText: {
-    // flex: 1,
     color: '#F2F2F3',
     fontSize: 15,
   },
@@ -153,5 +193,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  searchBar: {
+    backgroundColor: '#1F1C1F',
+  },
+  searchInput: {
+    height: 50,
+    margin: 5,
+    paddingLeft: 10,
+    backgroundColor: '#747175',
+    borderRadius: 5,
   },
 });

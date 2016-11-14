@@ -70,6 +70,7 @@ export default class App extends Component {
   }
 
   renderScene(route, navigator) {
+    StatusBar.setBackgroundColor('#434343', true);
     if (route.index === 0) {
       return (
         <View>
