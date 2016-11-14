@@ -19,10 +19,10 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Customize the highlight and selection effect of the cell.
+- [x] Customize the highlight and selection effect of the cell.
 - [ ] Customize the status bar to match app color scheme.
 - [ ] Add a search bar.
-- [ ] Customize the navigation bar.
+- [x] Customize the navigation bar.
 - [ ] Add icons to improve the app UI.
 - [ ] User sees a play icon overlay on backdrop image if movie trailer is available.
 - [ ] User can tap on a button to play the movie trailer.
