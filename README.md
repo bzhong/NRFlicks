@@ -2,7 +2,7 @@
 
 **React Native version of Flicks** is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **25** hours spent in total
+Time spent: **30** hours spent in total
 
 ## User Stories
 
@@ -24,8 +24,8 @@ The following **optional** features are implemented:
 - [x] Add a search bar.
 - [x] Customize the navigation bar.
 - [x] Add icons to improve the app UI.
-- [ ] User sees a play icon overlay on backdrop image if movie trailer is available.
-- [ ] User can tap on a button to play the movie trailer.
+- [x] User sees a play icon overlay on backdrop image if movie trailer is available.
+- [x] User can tap on a button to play the movie trailer.
 - [ ] Tapping on a movie poster image shows the movie poster as full screen and zoomable.
 - [ ] All images fade in and progressively load low resolution to high resolution.
 - [ ] Search bar animates with scroll.
