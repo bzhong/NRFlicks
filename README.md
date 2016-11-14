@@ -23,7 +23,7 @@ The following **optional** features are implemented:
 - [x] Customize the status bar to match app color scheme.
 - [x] Add a search bar.
 - [x] Customize the navigation bar.
-- [ ] Add icons to improve the app UI.
+- [x] Add icons to improve the app UI.
 - [ ] User sees a play icon overlay on backdrop image if movie trailer is available.
 - [ ] User can tap on a button to play the movie trailer.
 - [ ] Tapping on a movie poster image shows the movie poster as full screen and zoomable.
