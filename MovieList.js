@@ -95,14 +95,15 @@ export default class MovieList extends Component {
     return (
       <View style={styles.container}>
         {this.state.animating && (
-          <View>
+          <View style={styles.centering}>
             <ActivityIndicator
               animating={this.state.animating}
-              style={styles.centering}
+              size='large'
             />
           </View>
         )}
-        {false ? (
+        {this.state.canLoadData || this.state.loadSuccess ? (
+          <View style={{flex: 1}}>
           <ListView
             dataSource={dataSource}
             renderRow={(rowData) => this.renderMovieRow(rowData)}
@@ -113,6 +114,7 @@ export default class MovieList extends Component {
               />
             }
           />
+          </View>
         ) : (
           <View style={styles.networkError}>
             <Text style={styles.networkText}>
@@ -128,9 +130,10 @@ export default class MovieList extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#1F1C1F',
-    height: 500,
+    height: 800,
   },
   centering: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },

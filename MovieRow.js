@@ -15,7 +15,10 @@ export default function MovieRow({
 }) {
   const releaseDate = new Date(movie.release_date);
   return (
-    <TouchableHighlight onPress={() => press(movie)}>
+    <TouchableHighlight
+      underlayColor='#2F2F2F'
+      onPress={() => press(movie)}
+    >
       <View style={styles.container}>
         <Image
           style={styles.poster}

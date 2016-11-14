@@ -8,6 +8,7 @@ import {
   ViewPagerAndroid,
   Button,
   StyleSheet,
+  StatusBar,
 } from 'react-native';
 import NowPlayingMovies from './NowPlayingMovies';
 import TopRatedMovies from './TopRatedMovies';
