@@ -13,11 +13,13 @@ import {
 import NowPlayingMovies from './NowPlayingMovies';
 import TopRatedMovies from './TopRatedMovies';
 import MovieDetails from './MovieDetails';
+import MovieTrailer from './MovieTrailer';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const routes = [
   {title: 'Movie List', index: 0},
   {title: 'Movie Details', index: 1},
+  {title: 'Movie Trailer', index: 2},
 ];
 
 export default class App extends Component {
@@ -89,6 +91,10 @@ export default class App extends Component {
     } else if (route.index === 1) {
       return (
           <MovieDetails navigator={navigator} movie={route.movie} />
+      );
+    } else if (route.index === 2) {
+      return (
+        <MovieTrailer navigator={navigator} source={route.source} />
       );
     }
   }

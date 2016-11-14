@@ -33,6 +33,7 @@ export default class MovieDetails extends React.Component {
     this.viewLayout = this.viewLayout.bind(this);
     this.backToMovieList = this.backToMovieList.bind(this);
     this.computeIconPos = this.computeIconPos.bind(this);
+    this.playTrailer = this.playTrailer.bind(this);
   }
 
   componentWillMount() {
@@ -79,6 +80,13 @@ export default class MovieDetails extends React.Component {
     })
   }
 
+  playTrailer() {
+    this.props.navigator.push({
+      source: this.state.trailerSource,
+      index: 2,
+    });
+  }
+
   render() {
     const { movie } = this.props;
     const { orientation, hasTrailer, trailerSource, iconTop, iconLeft } = this.state;
@@ -96,16 +104,27 @@ export default class MovieDetails extends React.Component {
         </TouchableHighlight>
         {orientation === ORIENTATION_PORTRAIT ? (
           <View>
-            <Image
-              style={styles.portraitBackdrop}
-              resizeMode={Image.resizeMode.resize}
-              source={{ uri: `${DEFAULT_IMAGE_URL_PREFIX}${movie.backdrop_path}` }}
-              onLayout={this.computeIconPos}
-            />
-            {hasTrailer && (
-              <View style={[styles.playIcon, { top: iconTop, left: iconLeft }]}>
-                <Icon name="youtube-play" size={ICON_SIZE} />
-              </View>
+            {hasTrailer ? (
+              <TouchableHighlight onPress={this.playTrailer}>
+                <View>
+                  <Image
+                    style={styles.portraitBackdrop}
+                    resizeMode={Image.resizeMode.resize}
+                    source={{ uri: `${DEFAULT_IMAGE_URL_PREFIX}${movie.backdrop_path}` }}
+                    onLayout={this.computeIconPos}
+                  />
+                  <View style={[styles.playIcon, { top: iconTop, left: iconLeft }]}>
+                    <Icon name="youtube-play" size={ICON_SIZE} color='#D1C6C9' />
+                  </View>
+                </View>
+              </TouchableHighlight>
+            ) : (
+              <Image
+                style={styles.portraitBackdrop}
+                resizeMode={Image.resizeMode.resize}
+                source={{ uri: `${DEFAULT_IMAGE_URL_PREFIX}${movie.backdrop_path}` }}
+                onLayout={this.computeIconPos}
+              />
             )}
             <View>
               <Text style={styles.title}>
