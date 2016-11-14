@@ -13,6 +13,7 @@ import {
 import NowPlayingMovies from './NowPlayingMovies';
 import TopRatedMovies from './TopRatedMovies';
 import MovieDetails from './MovieDetails';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const routes = [
   {title: 'Movie List', index: 0},
@@ -50,7 +51,7 @@ export default class App extends Component {
         >
           <View style={styles.tabAlignment}>
             <Text style={styles.tabText}>
-              Now playing
+              <Icon name="film" size={30} />
             </Text>
           </View>
         </TouchableHighlight>
@@ -61,7 +62,7 @@ export default class App extends Component {
         >
           <View style={styles.tabAlignment}>
             <Text style={styles.tabText}>
-              Top rated
+              <Icon name="star" size={30} />
             </Text>
           </View>
         </TouchableHighlight>
@@ -120,5 +121,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  backButton: {
+    color: '#CAC7CA',
+    fontSize: 15,
+    padding: 15,
+  },
+  navigationBar: {
+    backgroundColor: '#1F1C1F',
   },
 });
