@@ -148,6 +148,7 @@ export default class MovieList extends Component {
             <ListView
               dataSource={dataSource}
               renderRow={(rowData) => this.renderMovieRow(rowData)}
+              enableEmptySections={true}
               refreshControl={
                 <RefreshControl
                   refreshing={refreshing}
